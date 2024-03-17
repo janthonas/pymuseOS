@@ -46,7 +46,15 @@ def main_directory(stdscr):
             current_path = current_path + "/" + str(menu[current_row])
             current_row = 0
         elif key == curses.KEY_BACKSPACE or key == 27:
-            current_path = os.path.dirname(current_path)
+            # splits the path into parts
+            path_parts = current_path.split(os.sep)
+            
+            # removes the last part
+            new_path_parts = path_parts[:-1]
+            
+            # joins the path not including the last part
+            current_path = os.sep.join(new_path_parts)
+            
             
         
         menu = create_directory_list(current_path)
